@@ -2,7 +2,7 @@
 port 1194
 proto udp
 dev tun
-;dev-node MyTap
+cipher AES-256-CBC
 
 ca /etc/openvpn/easy-rsa/keys/ca.crt
 cert /etc/openvpn/easy-rsa/keys/{{ ansible_hostname }}.crt
@@ -18,13 +18,6 @@ group {{ openvpn_group }}
 # 2048 bit keys. 
 dh /etc/openvpn/easy-rsa/keys/dh2048.pem
 
-# Configure server mode and supply a VPN subnet
-# for OpenVPN to draw client addresses from.
-# The server will take 10.8.0.1 for itself,
-# the rest will be made available to clients.
-# Each client will be able to reach the server
-# on 10.8.0.1. Comment this line out if you are
-# ethernet bridging. See the man page for more info.
 server {{ vpn_net }} {{ vpn_mask }}
 ifconfig-pool-persist ipp.txt
 keepalive 10 120

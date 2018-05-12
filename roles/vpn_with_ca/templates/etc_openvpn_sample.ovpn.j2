@@ -1,6 +1,9 @@
-tls-client
+client
+remote-cert-tls server
+dev tun
 remote {{ ansible_host }}
-comp-lzo
+compress lzo
+cipher AES-256-CBC
 port 1194
 proto udp
 <ca>
